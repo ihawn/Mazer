@@ -2,41 +2,30 @@
 <html lang="en">
 <head>
 <title>jQuery Change Button Text</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-$(document).ready(function()
-{
-
-});
-</script>
-<script src="Scripts/script.js">
-
-</script>
-<!-- <script>
-    $(function()
-    {
-        $('#generate_button').click(function()
-        {
-            GenerateImage();
-        });
-    });
-</script> -->
 </head>
 <body>
     <h1>Title</h1>
     <hr>
     <div>
-        <button type="button" id="generate_button" onclick="GenerateImage()">Generate</button>
+        <button type="button" id="generate_button" onclick="GenerateRandomImage()">Generate</button>
         <br>
         <br>
     </div> 
-    <hr id="lower_line">
+    <hr id="mid_line">
+    <hr id="low_line">
+    <div>
+        <button type="button" id="sort_button" onclick="SortImage()">Sort</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="Scripts/script.js"></script>
+    <script src="Scripts/Quicksort.js"></script>
 </body>
 <footer id="foot">
     <h4>Source:</h4>
     <ul>
         <li>
-            <a href="https://github.com/ihawn/Mazer"><img src = "Images/github.png" width="32"></a>
+            <a href="https://github.com/ihawn/Mazer"><img src = "Images/github.png" width="32" id="github_ico"></a>
         </li>
     </ul>
 </footer>

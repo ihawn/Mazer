@@ -1,21 +1,64 @@
-function GenerateImage()
+function GenerateRandomImage()
 {
     var image = new Image;
     var width = 400,
     height = 400,
     buffer = new Uint8ClampedArray(width * height * 4);
 
+
     for(var y = 0; y < height; y++)
     {
         for(var x = 0; x < width; x++)
         {
-            var pos = (y * width + x) * 4; // position in buffer based on x and y
-            buffer[pos  ] = Math.random()*255;           // some R value [0, 255]
-            buffer[pos+1] = Math.random()*255;           // some G value
-            buffer[pos+2] = Math.random()*255;           // some B value
-            buffer[pos+3] = 255;           // set alpha channel
+            var pos = (y * width + x) * 4;
+            buffer[pos] = Math.random()*255;  
+            buffer[pos+1] = Math.random()*255;  
+            buffer[pos+2] = Math.random()*255;
+            buffer[pos+3] = 255;
         }
     }
+
+    console.log(buffer);
+
+
+    var canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d');
+
+    canvas.width = width;
+    canvas.height = height;
+    
+    var idata = ctx.createImageData(width,height);
+    idata.data.set(buffer);
+    ctx.putImageData(idata, 0, 0); 
+    var dataUri = canvas.toDataURL();  
+    image.src = dataUri;
+
+    try { document.getElementById('img').remove(); }
+    catch {}
+    
+    image.id = 'img';
+    image.width = 400;
+    image.height = 400;
+    document.body.insertBefore(image, document.getElementById('mid_line'));
+}
+
+function ImageFromArray(arr)
+{
+    var image = new Image;
+    var width = 400,
+    height = 400,
+    buffer = new Uint8ClampedArray(width * height * 4);
+
+
+    for(var i = 0; i < arr.length; i++)
+    {
+        for(var j = 0; j < 4; j++)
+        {
+            buffer[4*i + j] = arr[i][j];
+        }
+    }
+
+    console.log(buffer);
     
 
     var canvas = document.createElement('canvas'),
@@ -29,12 +72,28 @@ function GenerateImage()
     ctx.putImageData(idata, 0, 0); 
     var dataUri = canvas.toDataURL();  
     image.src = dataUri;
-    
-    
 
-    try { document.getElementById('maze').remove(); }
+    try { document.getElementById('img_sort').remove(); }
     catch {}
     
-    image.id = 'maze';
-    document.body.insertBefore(image, document.getElementById('lower_line'));
+    image.id = 'img_sort';
+    image.width = 400;
+    image.height = 400;
+    document.body.insertBefore(image, document.getElementById('low_line'));
+}
+
+function GetImageData()
+{
+    var img = document.getElementById('img');
+    var h = img.height, w = img.width;
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+
+    var imageData = ctx.getImageData(0, 0, w, h);
+    var data = imageData.data;
+    return data
 }
