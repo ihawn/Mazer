@@ -9,27 +9,35 @@ $(document).ready(function()
 
 });
 </script>
-<script>
+<script src="Scripts/script.js">
+
+</script>
+<!-- <script>
     $(function()
     {
         $('#generate_button').click(function()
         {
-            alert("click");
+            GenerateImage();
         });
     });
-</script>
+</script> -->
 </head>
 <body>
     <h1>Title</h1>
     <hr>
-
-    <button type="button" id="generate_button">Generate</button>
+    <div>
+        <button type="button" id="generate_button" onclick="GenerateImage()">Generate</button>
+        <br>
+        <br>
+    </div> 
+    <hr id="lower_line">
 </body>
-<footer>
-    <hr>
+<footer id="foot">
     <h4>Source:</h4>
     <ul>
-        <li><img src = "Images/github.png" width="32"></li>
+        <li>
+            <a href="https://github.com/ihawn/Mazer"><img src = "Images/github.png" width="32"></a>
+        </li>
     </ul>
 </footer>
 </html>
