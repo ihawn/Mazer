@@ -46,7 +46,14 @@ function QuickSort(arr, low, high)
 
 function FlattenColor(col)
 {
-    return 1000000*col[0] + 1000*col[1] + col[2];
+    return (1000000*col[0] + 1000*col[1] + col[2]);
+}
+
+function Buff2Hex(buffer) 
+{
+    return [...new Uint8Array(buffer)]
+        .map(x => x.toString(16).padStart(2, '0'))
+        .join('');
 }
 
 function Unflatten(arr, n)
@@ -62,16 +69,6 @@ function Unflatten(arr, n)
         arr2.push(row);
     }
     return arr2;
-}
-
-function Flatten(arr) 
-{
-    var arr1 = []
-    for (var i = 0; i < arr.length; i++)
-    {
-        arr1 = arr1.concat(arr[i]);
-    }
-    return arr1;
 }
 
 function Swap(arr, n1, n2)

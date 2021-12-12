@@ -1,7 +1,7 @@
 function GenerateRandomImage()
 {
     var image = new Image;
-    var width = 400,
+    var width = 600,
     height = 400,
     buffer = new Uint8ClampedArray(width * height * 4);
 
@@ -37,7 +37,7 @@ function GenerateRandomImage()
     catch {}
     
     image.id = 'img';
-    image.width = 400;
+    image.width = 600;
     image.height = 400;
     document.body.insertBefore(image, document.getElementById('mid_line'));
 }
@@ -45,16 +45,27 @@ function GenerateRandomImage()
 function ImageFromArray(arr)
 {
     var image = new Image;
-    var width = 400,
+    var width = 600,
     height = 400,
     buffer = new Uint8ClampedArray(width * height * 4);
 
+    var permArr = []; //Stores order to iterate over sorted buffer. Configured to go from upper left to lower right
+
+    for(var y = 0; y < height; y++)
+    {
+        for(var x = 0; x < width; x++)
+        {
+            permArr.push([Math.sqrt(x*x + y*y), y*width + x]);
+        }
+    }
+    permArr.sort(SortFunction);
+    console.log(permArr);
 
     for(var i = 0; i < arr.length; i++)
     {
         for(var j = 0; j < 4; j++)
         {
-            buffer[4*i + j] = arr[i][j];
+            buffer[4*permArr[i][1] + j] = arr[i][j];
         }
     }
 
@@ -77,7 +88,7 @@ function ImageFromArray(arr)
     catch {}
     
     image.id = 'img_sort';
-    image.width = 400;
+    image.width = 600;
     image.height = 400;
     document.body.insertBefore(image, document.getElementById('low_line'));
 }
@@ -96,4 +107,16 @@ function GetImageData()
     var imageData = ctx.getImageData(0, 0, w, h);
     var data = imageData.data;
     return data
+}
+
+function SortFunction(a, b)
+{
+    if (a[0] === b[0])
+    {
+        return 0;
+    }
+    else
+    {
+        return (a[0] < b[0]) ? -1 : 1;
+    }
 }
